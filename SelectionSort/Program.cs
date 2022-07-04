@@ -9,8 +9,6 @@ namespace SelectionSort {
 
             //arbitrary list of unsorted integers
             int[] integerArray = { 6, 5, -6, 0, 3, 10, 4, 6, -5, 0 };
-            int lowIndex = 0;
-            int highIndex = integerArray.Length - 1;
 
             Console.WriteLine("\nUnsorted List of Integers: ");
             PrintList(integerArray);
@@ -28,26 +26,41 @@ namespace SelectionSort {
             Console.WriteLine('\n');
         }
 
+        //Selection Sort(A[])
+        //   n = A.Length
+        //   for i = 0 to n
+        //      //set current element as the minimum
+        //      min = i
+        //      //check the element to be minimum
+        //      for j = i + 1 to n 
+        //         if list[j] < list[min] then
+        //            min = j;
+        //      // swap the minimum element with the current element*/
+        //      if indexMin != i then
+        //         swap list[min] and list[i]
+
         public static void SelectionSort(int[] integerArray) {
-            int n = integerArray.Length;
-            for (int i = 0; i < n; i++) {
+
+            for (int i = 0; i < integerArray.Length; i++) {
                 int min = i;
-                for (int j = i + 1; j < n; j++) {
-                    if (Less(integerArray[j], integerArray[min])) {
+                for (int j = i + 1; j < integerArray.Length; j++) {
+                    //
+                    if (CompareValues(integerArray[j], integerArray[min])) {
                         min = j;
                     }
                 }
-                Exchange(integerArray, i, min);
+                SwapPosition(integerArray, i, min);
             }
         }
 
-        public static void Exchange(int[] integerArray, int min, int max) {
-            int temp = integerArray[min];
-            integerArray[min] = integerArray[max];
-            integerArray[max] = temp;
+        public static void SwapPosition(int[] integerArray, int lower, int higher) {
+
+            int temp = integerArray[lower];
+            integerArray[lower] = integerArray[higher];
+            integerArray[higher] = temp;
         }
 
-        public static bool Less(int a, int b) {
+        public static bool CompareValues(int a, int b) {
             bool c;
             if (a < b) {
                 c = true;
