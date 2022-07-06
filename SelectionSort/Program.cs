@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Web;
-using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SelectionSort {
     class Program {
@@ -18,6 +20,7 @@ namespace SelectionSort {
             Console.WriteLine("\n");
         }
 
+        //print array of integers
         public static void PrintList(int[] integerArray) {
 
             foreach (int i in integerArray) {
@@ -36,38 +39,24 @@ namespace SelectionSort {
         //         if list[j] < list[min] then
         //            min = j;
         //      // swap the minimum element with the current element*/
-        //      if indexMin != i then
-        //         swap list[min] and list[i]
+        //      if min != i then
+        //         swap A[min] and A[i]
 
         public static void SelectionSort(int[] integerArray) {
-
-            for (int i = 0; i < integerArray.Length; i++) {
+            int n = integerArray.Length;
+            for (int i = 0; i < n; i++) {
                 int min = i;
-                for (int j = i + 1; j < integerArray.Length; j++) {
-                    //
-                    if (CompareValues(integerArray[j], integerArray[min])) {
+                for (int j = i + 1; j < n; j++) {
+                    if (integerArray[j] < integerArray[min]) {
                         min = j;
                     }
                 }
-                SwapPosition(integerArray, i, min);
+                if (min != i) {
+                    int temp = integerArray[min];
+                    integerArray[min] = integerArray[i];
+                    integerArray[i] = temp;
+                }
             }
-        }
-
-        public static void SwapPosition(int[] integerArray, int lower, int higher) {
-
-            int temp = integerArray[lower];
-            integerArray[lower] = integerArray[higher];
-            integerArray[higher] = temp;
-        }
-
-        public static bool CompareValues(int a, int b) {
-            bool c;
-            if (a < b) {
-                c = true;
-            } else {
-                c = false;
-            }
-            return c;
         }
     }
 }
